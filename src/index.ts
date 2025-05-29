@@ -2,6 +2,15 @@ import { Hono } from "hono";
 
 const app = new Hono<{ Bindings: CloudflareBindings }>();
 
+function arrayBufferToBase64(buffer: ArrayBuffer): string {
+  let binary = "";
+  const bytes = new Uint8Array(buffer);
+  for (let i = 0; i < bytes.byteLength; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
+
 app.get("/", async (c) => {
   const mood = c.req.query("mood");
 
@@ -57,6 +66,22 @@ User Input: "${mood}"
   });
   // Extract only the response content from the result
   return c.json(JSON.parse((result as any).response));
+});
+
+app.get("/aud", async (c) => {
+  const audiourl = c.req.query("audiourl") ?? "";
+
+  const res = await fetch(audiourl.toString());
+  const blob = await res.arrayBuffer();
+
+  const base64 = arrayBufferToBase64(blob);
+
+  const results = await c.env.AI.run("@cf/openai/whisper-large-v3-turbo", {
+    audio: base64,
+    language: "en",
+  });
+
+  return c.json(results.text);
 });
 
 export default app;
