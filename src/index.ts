@@ -85,23 +85,23 @@ app.get("/aud", async (c) => {
 });
 
 app.get("/fol", async (c) => {
-  const stuff2 = c.req.query("transcription");
+  const stuff = c.req.query("stuff");
 
-  if (!stuff2) {
-    return c.json({ error: "transcription parameter is required" }, 400);
+  if (!stuff) {
+    return c.json({ error: "stuff parameter is required" }, 400);
   }
-  const stuff = {
-    idea: "the most common obstacles that people actually face is the ability to do it, people fear it because they see it as challenge but they are not aware that it takes only half actual effort and twice the emotional effort, it's that emotional effort that is actually hard",
-    followup: [
-      "How can the concept of iteration be applied to different areas of life, such as business or personal growth?",
-      "What are some common obstacles that prevent people from iterating and improving their ideas?",
-      "Can you think of any examples of successful projects or products that have used iteration to achieve significant breakthroughs?",
-      "How do you think the concept of iteration can be used to overcome initial failures or setbacks in different areas of life?",
-      "Can you think of a specific instance where iteration led to significant improvement or success?",
-      "What are some potential drawbacks or limitations of relying on iteration to achieve progress or mastery?",
-    ],
-    title: "The Power Of Iterations",
-  };
+  // const stuff = {
+  //   idea: "the most common obstacles that people actually face is the ability to do it, people fear it because they see it as challenge but they are not aware that it takes only half actual effort and twice the emotional effort, it's that emotional effort that is actually hard",
+  //   followup: [
+  //     "How can the concept of iteration be applied to different areas of life, such as business or personal growth?",
+  //     "What are some common obstacles that prevent people from iterating and improving their ideas?",
+  //     "Can you think of any examples of successful projects or products that have used iteration to achieve significant breakthroughs?",
+  //     "How do you think the concept of iteration can be used to overcome initial failures or setbacks in different areas of life?",
+  //     "Can you think of a specific instance where iteration led to significant improvement or success?",
+  //     "What are some potential drawbacks or limitations of relying on iteration to achieve progress or mastery?",
+  //   ],
+  //   title: "The Power Of Iterations",
+  // };
   const content = `
 # Role and Objective
 You help users improve their raw ideas (usually spoken transcriptions) by:
