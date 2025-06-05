@@ -141,10 +141,11 @@ You help users improve their raw ideas (usually spoken transcriptions) by:
   `;
   const result = await c.env.AI.run("@cf/meta/llama-4-scout-17b-16e-instruct", {
     messages: [{ role: "user", content: content }],
+    max_tokens: 1024,
   });
-
-  return c.json(JSON.parse((result as any).response));
-  // return c.json(result);
+  // console.log(result);
+  // return c.json(JSON.parse((result as any).response));
+  return c.json(result);
 });
 
 export default app;
