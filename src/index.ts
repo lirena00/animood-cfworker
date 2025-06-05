@@ -144,8 +144,8 @@ You help users improve their raw ideas (usually spoken transcriptions) by:
     max_tokens: 1024,
   });
   // console.log(result);
-  // return c.json(JSON.parse((result as any).response));
-  return c.json(result);
+  return c.json(JSON.parse((result as any).response));
+  // return c.json(result);
 });
 
 export default app;
